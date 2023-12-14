@@ -7,7 +7,9 @@ import (
 )
 
 func StartServer() {
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		ServerHeader: "X-Forwarded-For",
+	})
 
 	app.Get("/", handleIndex)
 
