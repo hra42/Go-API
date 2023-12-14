@@ -18,8 +18,6 @@ func StartServer() {
 
 	// IPs
 	app.Get("/api/v1/ip/current", ip.HandleCurrentIP)
-	app.Get("/api/v1/ip/current_v4", ip.HandleCurrentIPv4)
-	app.Get("/api/v1/ip/current_v6", ip.HandleCurrentIPv6)
 
 	app.Listen(":3000")
 }
