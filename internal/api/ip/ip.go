@@ -1,24 +1,20 @@
 package ip
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
+	"net"
+	"net/http"
 )
 
-// return the current user IPv4 IP of the request
-func HandleCurrentIP(c *fiber.Ctx) error {
-	// get the current user IPs
-	ips := c.IPs()
-	var ip string
+func GetIP(c *gin.Context) {
+	ip := getClientIP(c.Request)
+	c.JSON(http.StatusOK, gin.H{"ip": ip})
+}
 
-	if len(ips) > 0 {
-		ip = ips[0]
-	} else {
-		// fallback to direct IP if no forwarded IPs are found
-		ip = c.IP()
+func getClientIP(req *http.Request) string {
+	ip := req.Header.Get("X-Forwarded-For")
+	if ip == "" {
+		ip, _, _ = net.SplitHostPort(req.RemoteAddr)
 	}
-
-	// json return of the IP
-	return c.JSON(fiber.Map{
-		"ip": ip,
-	})
+	return ip
 }
