@@ -1,7 +1,9 @@
 package api
 
-import "github.com/gofiber/fiber/v2"
+import "github.com/gin-gonic/gin"
 
-func handleIndex(c *fiber.Ctx) error {
-	return c.Status(404).SendString("404 - No Endpoint specified")
+func index(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "Hello World!",
+	})
 }
