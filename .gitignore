@@ -6,6 +6,7 @@
 *.exe~
 *.dll
 *.so
+*.http
 *.dylib
 bin/
 .idea/
@@ -21,3 +22,4 @@ bin/
 
 # Go workspace file
 go.work
+/internal/api/ip/http-client.private.env.json
